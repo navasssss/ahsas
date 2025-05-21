@@ -312,7 +312,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 // Draw cropped image inside the transparent box
-                ctx.drawImage(croppedImage, transparentBox.x, transparentBox.y, transparentBox.width, transparentBox.height);
+                // ctx.drawImage(croppedImage, transparentBox.x, transparentBox.y, transparentBox.width, transparentBox.height);
+                const imgAspect = croppedImage.width / croppedImage.height;
+                const boxAspect = transparentBox.width / transparentBox.height;
+
+                let drawWidth, drawHeight, offsetX, offsetY;
+
+                if (imgAspect > boxAspect) {
+                    // Image is wider than the box
+                    drawHeight = transparentBox.height;
+                    drawWidth = croppedImage.width * (drawHeight / croppedImage.height);
+                } else {
+                    // Image is taller than the box
+                    drawWidth = transparentBox.width;
+                    drawHeight = croppedImage.height * (drawWidth / croppedImage.width);
+                }
+
+                // Center the image inside the box
+                offsetX = transparentBox.x + (transparentBox.width - drawWidth) / 2;
+                offsetY = transparentBox.y + (transparentBox.height - drawHeight) / 2;
+
+                ctx.drawImage(croppedImage, offsetX, offsetY, drawWidth, drawHeight);
 
                 if (isCircle) ctx.restore();
 
