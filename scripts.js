@@ -386,6 +386,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             showToast('Success!', 'Your pledge frame has been downloaded.', 'success');
         }
+        setTimeout(() => {
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`);
+        }, 3000);
     }
 
 
