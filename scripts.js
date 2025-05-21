@@ -339,13 +339,49 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+    // function downloadImage() {
+    //     // Show downloading animation
+    //     elements.downloadBtn.innerHTML = 'Downloading...';
+    //     elements.downloadBtn.disabled = true;
+
+    //     setTimeout(() => {
+    //         // Create a temporary link element
+    //         const downloadLink = document.createElement("a");
+    //         downloadLink.href = state.finalImage;
+    //         downloadLink.download = `${state.name.replace(/\s+/g, "-")}-anti-terrorism-pledge.png`;
+    //         document.body.appendChild(downloadLink);
+    //         downloadLink.click();
+    //         document.body.removeChild(downloadLink);
+
+    //         // Reset button
+    //         elements.downloadBtn.innerHTML = '<i data-lucide="download" class="w-4 h-4"></i> Download Image';
+    //         // lucide.createIcons();
+    //         elements.downloadBtn.disabled = false;
+
+    //         showToast('Success!', 'Your pledge frame has been downloaded.', 'success');
+    //     }, 800);
+    // }
     function downloadImage() {
-        // Show downloading animation
+        if (!state.finalImage) {
+            showToast('Error', 'Image not ready yet.', 'error');
+            return;
+        }
+
+        // Check if it's an iOS device
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+        if (isIOS) {
+            // Open image in new tab for manual download
+            window.open(state.finalImage, '_blank');
+            showToast('iOS Notice', 'Tap and hold the image to save it.', 'info');
+            return;
+        }
+
+        // For non-iOS devices, continue with auto download
         elements.downloadBtn.innerHTML = 'Downloading...';
         elements.downloadBtn.disabled = true;
 
         setTimeout(() => {
-            // Create a temporary link element
             const downloadLink = document.createElement("a");
             downloadLink.href = state.finalImage;
             downloadLink.download = `${state.name.replace(/\s+/g, "-")}-anti-terrorism-pledge.png`;
@@ -353,14 +389,13 @@ document.addEventListener('DOMContentLoaded', function () {
             downloadLink.click();
             document.body.removeChild(downloadLink);
 
-            // Reset button
             elements.downloadBtn.innerHTML = '<i data-lucide="download" class="w-4 h-4"></i> Download Image';
-            // lucide.createIcons();
             elements.downloadBtn.disabled = false;
 
             showToast('Success!', 'Your pledge frame has been downloaded.', 'success');
         }, 800);
     }
+
 
     function shareToSocial(platform) {
         if (!state.finalImage) {
