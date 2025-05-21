@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 elements.introOverlay.style.display = 'none';
             }, 3000);
         }
-    }, 1000);
+    }, 2000);
 
     // Event Listeners
 
