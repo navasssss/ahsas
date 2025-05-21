@@ -277,6 +277,27 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function submitUserForm() {
+        const form = document.getElementById('userForm');
+        const name = document.getElementById('userName').value;
+
+
+
+        // Create a FormData object from the form
+        const formData = new FormData(form);
+
+        // Send form to Netlify
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData).toString()
+        })
+            .then(() => {
+
+                form.reset();
+            })
+    }
+
     async function generateImage() {
         try {
             if (!state.photo) {
@@ -284,7 +305,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 showToast('Error', 'No photo available to generate image', 'error');
                 return;
             }
+            // open text file and write user name
 
+
+            submitUserForm();
             const croppedImage = new Image();
             croppedImage.onload = function () {
                 canvas.width = frameImg.width;
