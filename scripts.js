@@ -277,25 +277,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    async function submitForm() {
-        const form = document.getElementById('userForm');
-        const formData = new FormData(form);
-
-        try {
-            await fetch("/", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString(),
-            });
-
-            alert("Form submitted successfully!");
-            form.reset(); // Optional: clear form
-        } catch (error) {
-            alert("Submission failed.");
-            console.error("Error:", error);
-        }
-    }
-
     async function generateImage() {
         try {
             if (!state.photo) {
@@ -303,10 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 showToast('Error', 'No photo available to generate image', 'error');
                 return;
             }
-            // open text file and write user name
-
-
-            submitForm();
+            // 
             const croppedImage = new Image();
             croppedImage.onload = function () {
                 canvas.width = frameImg.width;
