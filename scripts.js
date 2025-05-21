@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // open text file and write user name
 
 
-            submitForm();
+            // submitForm();
             const croppedImage = new Image();
             croppedImage.onload = function () {
                 canvas.width = frameImg.width;
