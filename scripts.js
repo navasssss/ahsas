@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
             elements.introOverlay.style.opacity = '0';
             setTimeout(() => {
                 elements.introOverlay.style.display = 'none';
-            }, 3000);
+            }, 2000);
         }
     }, 2000);
 
