@@ -363,6 +363,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // }
     function downloadImage() {
 
+        console.log("set");
         setTimeout(() => {
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`);
             console.log("ok");
