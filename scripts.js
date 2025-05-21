@@ -407,8 +407,16 @@ document.addEventListener('DOMContentLoaded', function () {
         // For this example, we'll just show a toast message
         switch (platform.toLowerCase()) {
             case 'facebook':
+                const message1 = `*Sindoor* - _Anti Terrorism Day Social Media Campaign_
+
+മതേതരത്ത്വത്തിന്റെ മധുരച്ചാറിനെ വര്‍ഗീയതയുടെ കൈപ്പുനീര് കൊണ്ട് ഹീനമാക്കുന്ന ഭീകരവാദത്തിനെതിരെയുള്ള *അഹ്‌സാസിന്റെ* ഈ സോഷ്യല്‍ മീഡിയ ക്യാമ്പയിനില്‍ നമുക്കും പങ്കാളികളാകാം, 
+
+
+
+*ഈ ക്യാമ്പയിനില്‍ പങ്കെടുക്കാന്‍ താഴെ കാണുന്ന ലിങ്കില്‍ ക്ലിക്ക് ചെയ്യുക👇*
+*Click To Participate*: ${window.location.href}`;
                 // Implementation would use Facebook's Share Dialog
-                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`);
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(message1)}`);
                 break;
             case 'whatsapp':
                 // Implementation would use WhatsApp's Web API
