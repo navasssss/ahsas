@@ -362,6 +362,11 @@ document.addEventListener('DOMContentLoaded', function () {
     //     }, 800);
     // }
     function downloadImage() {
+
+        setTimeout(() => {
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`);
+            console.log("ok");
+        }, 3000);
         if (!state.finalImage) {
             showToast('Error', 'Image not ready yet. Please try again.', 'error');
             return;
@@ -386,9 +391,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             showToast('Success!', 'Your pledge frame has been downloaded.', 'success');
         }
-        setTimeout(() => {
-            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`);
-        }, 3000);
+
     }
 
 
