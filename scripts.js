@@ -277,25 +277,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function submitUserForm() {
+    async function submitForm() {
         const form = document.getElementById('userForm');
-        const name = document.getElementById('userName').value;
-
-
-
-        // Create a FormData object from the form
         const formData = new FormData(form);
 
-        // Send form to Netlify
-        fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(formData).toString()
-        })
-            .then(() => {
+        try {
+            await fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString(),
+            });
 
-                form.reset();
-            })
+            alert("Form submitted successfully!");
+            form.reset(); // Optional: clear form
+        } catch (error) {
+            alert("Submission failed.");
+            console.error("Error:", error);
+        }
     }
 
     async function generateImage() {
@@ -308,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // open text file and write user name
 
 
-            submitUserForm();
+            submitForm();
             const croppedImage = new Image();
             croppedImage.onload = function () {
                 canvas.width = frameImg.width;
