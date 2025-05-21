@@ -118,9 +118,9 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(() => {
         if (elements.introOverlay) {
             elements.introOverlay.style.opacity = '0';
-            setTimeout(() => {
-                elements.introOverlay.style.display = 'none';
-            }, 1000);
+            // setTimeout(() => {
+            elements.introOverlay.style.display = 'none';
+            // }, 1000);
         }
     }, 2000);
 
