@@ -363,25 +363,20 @@ document.addEventListener('DOMContentLoaded', function () {
     // }
     function downloadImage() {
         if (!state.finalImage) {
-            showToast('Error', 'Image not ready yet.', 'error');
+            showToast('Error', 'Image not ready yet. Please try again.', 'error');
             return;
         }
 
-        // Check if it's an iOS device
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
         if (isIOS) {
-            // Open image in new tab for manual download
-            window.open(state.finalImage, '_blank');
-            showToast('iOS Notice', 'Tap and hold the image to save it.', 'info');
-            return;
-        }
-
-        // For non-iOS devices, continue with auto download
-        elements.downloadBtn.innerHTML = 'Downloading...';
-        elements.downloadBtn.disabled = true;
-
-        setTimeout(() => {
+            // iOS workaround: open image in new tab
+            const newTab = window.open();
+            newTab.document.body.style.margin = '0';
+            newTab.document.body.innerHTML = `<img src="${state.finalImage}" style="width:100%;height:auto;">`;
+            showToast('Tip!', 'Tap and hold the image to save it.', 'info');
+        } else {
+            // Normal download for non-iOS
             const downloadLink = document.createElement("a");
             downloadLink.href = state.finalImage;
             downloadLink.download = `${state.name.replace(/\s+/g, "-")}-anti-terrorism-pledge.png`;
@@ -389,12 +384,10 @@ document.addEventListener('DOMContentLoaded', function () {
             downloadLink.click();
             document.body.removeChild(downloadLink);
 
-            elements.downloadBtn.innerHTML = '<i data-lucide="download" class="w-4 h-4"></i> Download Image';
-            elements.downloadBtn.disabled = false;
-
             showToast('Success!', 'Your pledge frame has been downloaded.', 'success');
-        }, 800);
+        }
     }
+
 
 
     function shareToSocial(platform) {
