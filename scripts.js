@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     cropper = new Cropper(document.getElementById('cropperImage'), {
                         viewMode: 1,
                         responsive: true,
-                        autoCrop: true,
+                        autoCrop: false,
                         ready() {
                             // Set default crop box size to 558x747px centered in the image
                             const containerData = cropper.getContainerData();
