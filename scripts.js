@@ -2,6 +2,31 @@
 let cropper;
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize Lucide icons
+    function uploadImage(base64Image) {
+        fetch('https://dhicahsas.netlify.app/upload', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                image: base64Image
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.url) {
+                    console.log('Image URL:', data.url);
+                    // Optionally share it or use it in social message
+                } else {
+                    console.error('Upload failed:', data);
+                    showToast('Error', 'Failed to store image on server.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Upload error:', error);
+                showToast('Error', 'Failed to upload image.', 'error');
+            });
+    }
 
     lucide.createIcons();
     const message = `*Sindoor* - _Anti Terrorism Day Social Media Campaign_
@@ -349,6 +374,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Save final image
                 state.finalImage = canvas.toDataURL('image/png');
+                uploadImage(state.finalImage);
                 elements.finalPhoto.src = state.finalImage;
                 document.getElementById('downloadBtn').style.display = 'block';
                 showToast('Success', 'Frame generated successfully', 'success');
@@ -519,6 +545,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <i data-lucide="x" class="w-4 h-4"></i>
       </button>
     `;
+
 
         document.body.appendChild(toast);
         // lucide.createIcons();
